@@ -1,6 +1,19 @@
 @openmediaserver.net_HostAddress = http://localhost:5265
 
-GET {{openmediaserver.net_HostAddress}}/weatherforecast/
+### Get All Media
+GET {{openmediaserver.net_HostAddress}}/api/media
+Accept: application/json
+
+###
+
+### Get Media Item by ID
+GET {{openmediaserver.net_HostAddress}}/api/media/media-id-here
+Accept: application/json
+
+###
+
+### Stream Media with Range Support
+GET {{openmediaserver.net_HostAddress}}/api/stream/media-id-here
 Accept: application/json
 
 ###
