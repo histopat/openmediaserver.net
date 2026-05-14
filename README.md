@@ -4,7 +4,7 @@
 
 ## How it works?
 
-openmediaserver.net is a media server application developed to scan video (MP4, MKV, AVI, WMV) and audio (MP3, FLAC, WAV, WMA) files from a configurable media library folder and serve them to clients via a RESTful API. The application provides a collection API that allows querying media files by ID or filename, supports HTTP Range headers for back-and-forward (seek) operations, converts file sizes to human-readable format, and sorts and serves all media by type (video/audio); thus, web or mobile applications can access the entire media catalog with simple GET requests, retrieve individual media information, or request file streams within a desired byte range.
+openmediaserver.net is a media server application developed to scan video (MP4, MKV, AVI, WMV) and audio (MP3, FLAC, WAV, WMA) files from a configurable media library folder (by default, the ***library*** folder is located in the application directory) and serve them to clients via a RESTful API. The application provides a collection API that allows querying media files by ID or filename, supports HTTP Range headers for back-and-forward (seek) operations, converts file sizes to human-readable format, and sorts and serves all media by type (video/audio); thus, web or mobile applications can access the entire media catalog with simple GET requests, retrieve individual media information, or request file streams within a desired byte range.
 
 ## System Requirements
 

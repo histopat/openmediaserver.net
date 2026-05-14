@@ -1,9 +1,12 @@
-﻿namespace openmediaserver.net.Controllers
+﻿using Microsoft.Extensions.Hosting;
+
+namespace openmediaserver.net.Controllers
 {
     public class MediaService
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<MediaService> _logger;
+        private readonly IHostEnvironment _env;
 
         private static readonly Dictionary<string, (string ContentType, MediaType MediaType)> SupportedFormats =
             new(StringComparer.OrdinalIgnoreCase)
@@ -18,14 +21,27 @@
                 { ".wma", ("audio/x-ms-wma", MediaType.Audio) },
             };
 
-        public MediaService(IConfiguration configuration, ILogger<MediaService> logger)
+        public MediaService(IConfiguration configuration, ILogger<MediaService> logger, IHostEnvironment env)
         {
             _configuration = configuration;
             _logger = logger;
+            _env = env;
         }
 
-        public string MediaRootPath =>
-            _configuration["MediaSettings:RootPath"] ?? Path.Combine(AppContext.BaseDirectory, "MediaLibrary");
+        public string MediaRootPath
+        {
+            get
+            {
+                var configured = _configuration["MediaSettings:RootPath"];
+                if (string.IsNullOrWhiteSpace(configured))
+                    return Path.Combine(_env.ContentRootPath, "MediaLibrary");
+
+                if (Path.IsPathRooted(configured))
+                    return configured;
+
+                return Path.Combine(_env.ContentRootPath, configured);
+            }
+        }
 
         public List<MediaItem> GetAllMedia()
         {

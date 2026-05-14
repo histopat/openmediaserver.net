@@ -169,3 +169,6 @@ static (long Start, long End)? ParseRange(string rangeHeader, long totalLength)
 
     return (start, end);
 }
+
+// Start the web application so the process keeps running when launched with `dotnet <app>.dll`.
+app.Run();
